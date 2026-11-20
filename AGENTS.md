@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application structure
+- Keep public exchange connections in browser-only effects with independent adapters and a shared normalization layer; this prevents SSR socket execution and keeps exchange protocols isolated.
+- Derive rolling metrics from timestamped trades with USDT notional and taker direction; this preserves comparability between spot and perpetual feeds.
+- Render financial charts with dynamically imported Lightweight Charts and colors resolved from global semantic tokens; this avoids server-side browser access and theme drift.

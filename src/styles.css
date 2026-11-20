@@ -73,26 +73,37 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 0.375rem;
+  --background: oklch(0.145 0.006 260);
+  --foreground: oklch(0.88 0.006 260);
+  --card: oklch(0.18 0.006 260);
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.79 0.16 163);
+  --primary-foreground: oklch(0.17 0.025 163);
+  --secondary: oklch(0.22 0.007 260);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.21 0.006 260);
+  --muted-foreground: oklch(0.59 0.014 260);
+  --accent: oklch(0.26 0.008 260);
+  --accent-foreground: var(--foreground);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.285 0.007 260);
+  --input: var(--border);
+  --ring: var(--primary);
+  --buy: oklch(0.79 0.16 163);
+  --sell: oklch(0.7 0.18 22);
+  --neutral: oklch(0.82 0.145 87);
+  --exchange-binance: oklch(0.85 0.16 93);
+  --exchange-bybit: oklch(0.8 0.14 68);
+  --exchange-okx: oklch(0.89 0.01 260);
+  --ema-fast: var(--neutral);
+  --ema-medium: oklch(0.72 0.12 225);
+  --ema-slow: oklch(0.68 0.13 320);
+  --sma-long: oklch(0.74 0.035 260);
+  --font-terminal: 'IBM Plex Mono', monospace;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -151,5 +162,54 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 0;
+    letter-spacing: 0;
   }
 }
+
+@theme inline {
+  --color-buy: var(--buy);
+  --color-sell: var(--sell);
+  --color-neutral: var(--neutral);
+  --font-mono: var(--font-terminal);
+}
+
+.terminal { min-height: 100vh; max-width: 1920px; margin: auto; }
+.terminal-header { min-height: 76px; padding: 18px 26px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); gap: 20px; }
+.brand-mark { height: 35px; width: 35px; color: var(--primary); display: grid; place-items: center; border: 1px solid var(--primary); border-radius: 5px; }
+.terminal-bar { padding: 14px 26px; border-bottom: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+.terminal-layout { display: grid; grid-template-columns: minmax(420px, 0.93fr) minmax(500px, 1.32fr); padding: 22px 26px; gap: 24px; }
+.terminal-layout > div { min-width: 0; }
+.mini-chart, .main-chart { overflow: hidden; width: 100%; }
+.section-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0; color: var(--muted-foreground); display: flex; align-items: center; gap: 8px; }
+.exchange-card { border: 1px solid var(--border); background: var(--card); border-radius: 5px; padding: 16px; margin-top: 12px; }
+.exchange-logo { width: 28px; height: 28px; display: grid; place-items: center; background: var(--secondary); border-radius: 4px; font-weight: 700; }
+.exchange-binance { color: var(--exchange-binance); }
+.exchange-bybit { color: var(--exchange-bybit); }
+.exchange-okx { color: var(--exchange-okx); }
+.metric-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.metric-label { font-size: 9px; color: var(--muted-foreground); margin-bottom: 5px; }
+.metric-value { font-family: var(--font-terminal); font-size: 11px; }
+.panel-section { margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border); }
+.mini-chart { height: 68px; position: relative; margin: 12px 0; }
+.chart-empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted-foreground); font: 11px var(--font-terminal); }
+.main-chart { height: 390px; position: relative; margin-top: 12px; }
+.pressure-meter { display: flex; height: 7px; gap: 3px; margin: 15px 0; overflow: hidden; border-radius: 2px; }
+.pressure-buy { background: var(--buy); }
+.pressure-neutral { background: var(--neutral); }
+.pressure-sell { background: var(--sell); }
+.data-table { width: 100%; border-collapse: collapse; font: 11px var(--font-terminal); }
+.data-table th { font: 9px 'IBM Plex Sans', sans-serif; text-align: right; color: var(--muted-foreground); padding: 12px 8px; background: var(--muted); }
+.data-table td { padding: 13px 8px; text-align: right; border-bottom: 1px solid var(--border); }
+.data-table th:first-child, .data-table td:first-child { text-align: left; }
+.signal-band { border-left: 3px solid var(--neutral); background: var(--card); padding: 18px; margin-top: 14px; }
+.observation { display: flex; gap: 10px; padding: 10px 0; color: var(--muted-foreground); font-size: 12px; border-bottom: 1px solid var(--border); }
+.status-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; display: inline-block; }
+.terminal-select { background: var(--secondary); color: var(--foreground); border: 1px solid var(--border); border-radius: 4px; padding: 7px 28px 7px 10px; font: 12px var(--font-terminal); }
+.terminal-footer { padding: 13px 26px; border-top: 1px solid var(--border); display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; color: var(--muted-foreground); font: 9px var(--font-terminal); }
+.indicator-dot { width: 6px; height: 6px; display: inline-block; border-radius: 50%; }
+.indicator-fast { background: var(--ema-fast); }.indicator-medium { background: var(--ema-medium); }.indicator-slow { background: var(--ema-slow); }.indicator-long { background: var(--sma-long); }
+@media (min-width: 1600px) { .main-chart { height: 470px; } }
+@media (max-width: 1020px) { .terminal-layout { grid-template-columns: minmax(0, 1fr); } .terminal-header, .terminal-bar { padding-left: 18px; padding-right: 18px; } }
+@media (max-width: 540px) { .terminal-layout { padding: 16px 12px; gap: 20px; } .terminal-header { padding: 16px 12px; } .header-extra { display: none; } .terminal-bar { padding: 12px; gap: 10px; } .main-chart { height: 310px; } .data-table { font-size: 9px; } .data-table td, .data-table th { padding: 10px 4px; } }
